@@ -7,6 +7,7 @@ environment:
   sdk: ^3.6.1
 
 dependencies:
+  dart_periphery: ^0.9.17
   shelf: ^1.4.0
   shelf_router: ^1.1.0
 
