@@ -31,9 +31,9 @@ void test() {
   print('Native c-periphery Version : ${getCperipheryVersion()}');
   print('GPIO test');
 
-  var gpio = GPIO.advanced(18, config);
-  var gpio2 = GPIO(16, GPIOdirection.gpioDirOut);
-  var gpio3 = GPIO.advanced(5, config);
+  var gpio = GPIO.advanced(17, config);
+  // var gpio2 = GPIO(16, GPIOdirection.gpioDirOut);
+  // var gpio3 = GPIO.advanced(5, config);
 
   print('GPIO info: ${gpio.getGPIOinfo()}');
   print('GPIO native file handle: ${gpio.getGPIOfd()}');
@@ -42,18 +42,18 @@ void test() {
 
   for (var i = 0; i < 10; ++i) {
     gpio.write(true);
-    gpio2.write(true);
-    gpio3.write(true);
+    // gpio2.write(true);
+    // gpio3.write(true);
     sleep(Duration(milliseconds: 200));
     gpio.write(false);
-    gpio2.write(false);
-    gpio3.write(false);
+    // gpio2.write(false);
+    // gpio3.write(false);
     sleep(Duration(milliseconds: 200));
   }
 
   gpio.dispose();
-  gpio2.dispose();
-  gpio3.dispose();
+  // gpio2.dispose();
+  // gpio3.dispose();
 }
 
 
