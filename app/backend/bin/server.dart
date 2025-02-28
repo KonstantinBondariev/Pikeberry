@@ -11,13 +11,13 @@ final _gpioService = GpioService();
 
 final _router = Router()
   ..post('/gpio', _gpioHandler)
-  ..get('/gpio', _readAllGpioHandler);
+  ..get('/gpio', _testHandler);
 
-Future<Response> _readAllGpioHandler(Request request) async {
-  final pins = [17, 27, 22, 5, 6, 13, 19, 26];
-  final pinStatuses = _gpioService.readAllGPIO(pins);
+Future<Response> _testHandler(Request request) async {
 
-  return Response.ok(jsonEncode(pinStatuses));
+  _gpioService.test();
+
+  return Response.ok('');
 }  
 
 

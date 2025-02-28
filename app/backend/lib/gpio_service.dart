@@ -22,21 +22,37 @@ class GpioService {
     }
   }
 
-  Map<int, bool> readAllGPIO(List<int> pins) {
-  final Map<int, bool> pinStatuses = {};
+void test() {
+  var config = GPIOconfig();
+  config.direction = GPIOdirection.gpioDirOut;
+  print('Native c-periphery Version :  ${getCperipheryVersion()}');
+  print('GPIO test');
+  var gpio = GPIO(18, GPIOdirection.gpioDirOut);
+  // var gpio2 = GPIO(16, GPIOdirection.gpioDirOut);
+  // var gpio3 = GPIO.advanced(5, config);
 
-  for (var pin in pins) {
-    try {
-      final gpio = GPIO(pin, GPIOdirection.IN); // Открываем пин для чтения
-      pinStatuses[pin] = gpio.read(); // Читаем его состояние
-      gpio.dispose(); // Освобождаем ресурс
-    } catch (e) {
-      print('❌ Ошибка при чтении GPIO $pin: $e');
-      pinStatuses[pin] = false; // В случае ошибки считаем, что пин выключен
-    }
+  print('GPIO info: ' + gpio.getGPIOinfo());
+
+  print('GPIO native file handle: ${gpio.getGPIOfd()}');
+  print('GPIO chip name: ${gpio.getGPIOchipName()}');
+  print('GPIO chip label: ${gpio.getGPIOchipLabel()}');
+  print('GPIO chip name: ${gpio.getGPIOchipName()}');
+  print('GPIO chip label: ${gpio.getGPIOchipLabel()}');
+
+  for (var i = 0; i < 10; ++i) {
+    gpio.write(true);
+    // gpio2.write(true);
+    // gpio3.write(true);
+    sleep(Duration(milliseconds: 200));
+    gpio.write(false);
+    // gpio2.write(false);
+    // gpio3.write(false);
+    sleep(Duration(milliseconds: 200));
   }
 
-  return pinStatuses;
+  gpio.dispose();
+  // gpio2.dispose();
+  // gpio3.dispose();
 }
 
 }
