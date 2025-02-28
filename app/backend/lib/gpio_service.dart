@@ -21,4 +21,22 @@ class GpioService {
       gpio.dispose();
     }
   }
+
+  Map<int, bool> readAllGPIO(List<int> pins) {
+  final Map<int, bool> pinStatuses = {};
+
+  for (var pin in pins) {
+    try {
+      final gpio = GPIO(pin, GPIOdirection.IN); // Открываем пин для чтения
+      pinStatuses[pin] = gpio.read(); // Читаем его состояние
+      gpio.dispose(); // Освобождаем ресурс
+    } catch (e) {
+      print('❌ Ошибка при чтении GPIO $pin: $e');
+      pinStatuses[pin] = false; // В случае ошибки считаем, что пин выключен
+    }
+  }
+
+  return pinStatuses;
+}
+
 }

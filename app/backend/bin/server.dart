@@ -9,7 +9,17 @@ import 'package:shelf_router/shelf_router.dart';
 
 final _gpioService = GpioService();
 
-final _router = Router()..post('/gpio', _gpioHandler);
+final _router = Router()
+  ..post('/gpio', _gpioHandler)
+  ..get('/gpio', _readAllGpioHandler);
+
+Future<Response> _readAllGpioHandler(Request request) async {
+  final pins = [17, 27, 22, 5, 6, 13, 19, 26];
+  final pinStatuses = _gpioService.readAllGPIO(pins);
+
+  return Response.ok(jsonEncode(pinStatuses));
+}  
+
 
 Future<Response> _gpioHandler(Request request) async {
   GpioRequestBody body;
