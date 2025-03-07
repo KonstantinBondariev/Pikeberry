@@ -5,7 +5,7 @@ class GpioService {
   late GPIO _gpio;
 
   GpioService() {
-    print('Native c-periphery Version :  ${getCperipheryVersion()}');
+    // print('Native c-periphery Version :  ${getCperipheryVersion()}');
     _configureGPIO();
   }
 
