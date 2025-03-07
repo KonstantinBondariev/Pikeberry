@@ -12,7 +12,8 @@ final _gpioService = GpioService();
 final _router = Router()
   // ..post('/gpio', _gpioHandler)
   ..get('/gpio/on', _onHandler)
-  ..get('/gpio/off', _offHandler);
+  ..get('/gpio/off', _offHandler)
+  ..get('/gpio/dispose', _disposeHandler);
 
 Future<Response> _onHandler(Request request) async {
   print('Turning on GPIO');
@@ -22,6 +23,11 @@ Future<Response> _onHandler(Request request) async {
 
 Future<Response> _offHandler(Request request) async {
   _gpioService.off();
+  return Response.ok('');
+}
+
+Future<Response> _disposeHandler(Request request) async {
+  _gpioService.dispose();
   return Response.ok('');
 }
 
