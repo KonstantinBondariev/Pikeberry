@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'dart:io';
 
 import 'package:backend/gpio_service.dart';
@@ -10,36 +10,40 @@ import 'package:shelf_router/shelf_router.dart';
 final _gpioService = GpioService();
 
 final _router = Router()
-  ..post('/gpio', _gpioHandler)
-  ..get('/gpio', _testHandler);
+  // ..post('/gpio', _gpioHandler)
+  ..get('/gpio/on', _onHandler)
+  ..get('/gpio/off', _offHandler);
 
-Future<Response> _testHandler(Request request) async {
-
-  _gpioService.test();
-
-  return Response.ok('');
-}  
-
-
-Future<Response> _gpioHandler(Request request) async {
-  GpioRequestBody body;
-
-  try {
-    body = GpioRequestBody.fromJson(
-      jsonDecode(await request.readAsString()),
-    );
-  } on StateError catch (e) {
-    return Response.badRequest(body: e.message);
-  }
-
-  _gpioService.writeGPIO(
-    body.line,
-    body.direction,
-    body.value,
-  );
-
+Future<Response> _onHandler(Request request) async {
+  print('Turning on GPIO');
+  _gpioService.on();
   return Response.ok('');
 }
+
+Future<Response> _offHandler(Request request) async {
+  _gpioService.off();
+  return Response.ok('');
+}
+
+// Future<Response> _gpioHandler(Request request) async {
+//   GpioRequestBody body;
+
+//   try {
+//     body = GpioRequestBody.fromJson(
+//       jsonDecode(await request.readAsString()),
+//     );
+//   } on StateError catch (e) {
+//     return Response.badRequest(body: e.message);
+//   }
+
+//   _gpioService.writeGPIO(
+//     body.line,
+//     body.direction,
+//     body.value,
+//   );
+
+//   return Response.ok('');
+// }
 
 void main(List<String> args) async {
   final ip = InternetAddress.anyIPv4;
