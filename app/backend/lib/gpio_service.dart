@@ -38,6 +38,11 @@ class GpioService {
     while (true) {
       var movement = _gpioMovementSensor.read();
       print('Movement detected: $movement');
+      if (movement) {
+        on();
+      } else {
+        off();
+      }
       sleep(Duration(seconds: 1));
     }
   }
