@@ -34,17 +34,10 @@ class GpioService {
     _gpioRelay.write(false);
   }
 
-  bool isMovementDetected() {
-    return _gpioMovementSensor.read();
-  }
-
   void watchMovementTest() {
     while (true) {
-      if (isMovementDetected()) {
-        print('Movement detected');
-      } else {
-        print('No movement detected');
-      }
+      var movement = _gpioMovementSensor.read();
+      print('Movement detected: $movement');
       sleep(Duration(seconds: 1));
     }
   }
