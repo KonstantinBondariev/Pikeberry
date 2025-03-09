@@ -2,29 +2,51 @@ import 'package:dart_periphery/dart_periphery.dart';
 import 'dart:io';
 
 class GpioService {
-  late GPIO _gpio;
+  late GPIO _gpioRelay;
+  late GPIO _gpioMovementSensor;
 
   GpioService() {
-    // print('Native c-periphery Version :  ${getCperipheryVersion()}');
+    print('Native c-periphery Version :  ${getCperipheryVersion()}');
     _configureGPIO();
+    watchMovementTest();
   }
 
   void _configureGPIO() {
-    var config = GPIOconfig.defaultValues();
-    config.direction = GPIOdirection.gpioDirOut;
-    _gpio = GPIO.advanced(17, config);
+    var configOut = GPIOconfig.defaultValues();
+    configOut.direction = GPIOdirection.gpioDirOut;
+    _gpioRelay = GPIO.advanced(17, configOut);
+
+    var configIn = GPIOconfig.defaultValues();
+    configIn.direction = GPIOdirection.gpioDirIn;
+    _gpioMovementSensor = GPIO.advanced(27, configIn);
   }
 
   void dispose() {
-    _gpio.dispose();
+    _gpioRelay.dispose();
+    _gpioMovementSensor.dispose();
   }
 
   void on() {
-    _gpio.write(true);
+    _gpioRelay.write(true);
   }
 
   void off() {
-    _gpio.write(false);
+    _gpioRelay.write(false);
+  }
+
+  bool isMovementDetected() {
+    return _gpioMovementSensor.read();
+  }
+
+  void watchMovementTest() {
+    while (true) {
+      if (isMovementDetected()) {
+        print('Movement detected');
+      } else {
+        print('No movement detected');
+      }
+      sleep(Duration(seconds: 1));
+    }
   }
 
   void test() {
