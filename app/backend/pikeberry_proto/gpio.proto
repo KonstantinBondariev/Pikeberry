@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pikeberry;
+
+service Gpio {
+    rpc Write(GpioState) returns (Empty);
+    rpc Read(Lines) returns (GpioState);
+}
+
+message GpioState {
+    map<int32, bool> line_states = 1;
+}
+
+message Lines {
+    repeated int32 lines = 1;
+}
+
+message Empty {}

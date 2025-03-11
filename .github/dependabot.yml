@@ -1,0 +1,10 @@
+github:
+  dependabot: {}
+
+# github:
+#   dependabot:
+#     updates:
+#       - package-ecosystem: "github-actions"
+#         directory: "/"
+#         schedule:
+#           interval: "monthly"

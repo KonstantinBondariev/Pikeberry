@@ -1,0 +1,8 @@
+sdk:
+ - dev
+
+stages:
+  - analyze:
+    - analyze
+  - unit_test:
+    - test

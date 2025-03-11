@@ -1,0 +1,9 @@
+sdk:
+ - dev
+
+stages:
+  # Register two jobs to run under the `analyze` stage.
+  - analyze:
+    - analyze
+  - unit_test:
+    - test
