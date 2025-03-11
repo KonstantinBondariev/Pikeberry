@@ -1,0 +1,15 @@
+sdk:
+ - dev
+
+stages:
+  - analyze:
+    - analyze
+    - format
+  - unit_test:
+    - test
+  
+  - cron:
+    - test:
+      os:
+        - linux
+        - windows

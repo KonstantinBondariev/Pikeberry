@@ -1,0 +1,17 @@
+name: pikeberry
+description: A server app using the shelf package and Docker.
+version: 1.0.0
+repository: https://github.com/KonstantinBondariev/Pikeberry
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  dart_periphery: ^0.9.17
+  grpc: ^4.0.1
+  ioc_container: ^1.0.12
+
+dev_dependencies:
+  http: ^1.1.0
+  lints: ^5.0.0
+  test: ^1.24.0
