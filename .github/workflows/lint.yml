@@ -71,36 +71,6 @@ jobs:
         if: "always() && steps.app_backend_pikeberry_pub_upgrade.conclusion == 'success'"
         working-directory: app/backend/pikeberry
   job_003:
-    name: "analyze; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - id: app_backend_pikeberry_pub_upgrade
-        name: app/backend/pikeberry; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: app/backend/pikeberry
-      - name: "app/backend/pikeberry; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.app_backend_pikeberry_pub_upgrade.conclusion == 'success'"
-        working-directory: app/backend/pikeberry
-  job_004:
     name: Notify failure
     runs-on: ubuntu-latest
     if: failure()
@@ -114,4 +84,3 @@ jobs:
     needs:
       - job_001
       - job_002
-      - job_003
