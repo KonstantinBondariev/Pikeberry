@@ -15,7 +15,7 @@ github:
   # Setting just `cron` is a shortcut to keep the defaults for `push` and
   # `pull_request` while adding a single `schedule` entry.
   # `on` and `cron` cannot both be set.
-  cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.”
+  # cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.”
 
   # Specify additional environment variables accessible to all jobs
   env:
@@ -57,10 +57,10 @@ github:
   # conditional here, this is supported for all CI providers. The `if`
   # condition should use the appropriate syntax for the provider it is being
   # configured for.
-  stages:
-    - name: cron
-      # Only run this stage for scheduled cron jobs
-      if: github.event_name == 'schedule'
+  # stages:
+  #   - name: cron
+  #     # Only run this stage for scheduled cron jobs
+  #     if: github.event_name == 'schedule'
 
 # Adds a job that runs `mono_repo generate --validate` to check that everything
 # is up to date. You can specify the value as just `true` or give a `stage`

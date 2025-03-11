@@ -7,9 +7,3 @@ stages:
     - analyze
   - unit_test:
     - test
-
-  - cron:
-    - test:
-      os:
-        - linux
-        - windows

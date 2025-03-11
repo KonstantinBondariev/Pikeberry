@@ -27,7 +27,9 @@ IocContainer _bootstrap() {
       IocContainerBuilder()
         ..addSingleton(
           (container) =>
-              Platform.environment['ENVIRONMENT'] == 'test' ? GpioControllerFake() : GpioController(),
+              Platform.environment['ENVIRONMENT'] == 'test'
+                  ? GpioControllerFake()
+                  : GpioController(),
         )
         ..add(
           (container) =>
