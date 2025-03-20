@@ -1,15 +1,15 @@
-name: pikeberry_backend
+name: deployment
 description: A server app using the shelf package and Docker.
 version: 1.0.0
-repository: https://github.com/KonstantinBondariev/Pikeberry
+# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.7.0
 
 dependencies:
-  dart_periphery: ^0.9.17
-  grpc: ^4.0.1
-  ioc_container: ^1.0.12
+  docker2: ^4.9.0
+  shelf: ^1.4.0
+  shelf_router: ^1.1.0
 
 dev_dependencies:
   http: ^1.1.0

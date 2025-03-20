@@ -1,4 +1,4 @@
-import 'package:pikeberry/gpio/gpio_controller.dart';
+import 'package:pikeberry_backend/gpio/gpio_controller.dart';
 
 class GpioControllerFake implements GpioController {
   final Map<int, bool> _state = {};

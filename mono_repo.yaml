@@ -5,12 +5,12 @@ github:
   # Specify the `on` key to configure triggering events.
   # See https://docs.github.com/actions/reference/workflow-syntax-for-github-actions#on
   # The default values is
-  # on:
-  #   push:
-  #     branches:
-  #       - main
-  #       - master
-  #   pull_request:
+  on:
+    push:
+      branches:
+        - main
+        - develop
+    pull_request:
 
   # Setting just `cron` is a shortcut to keep the defaults for `push` and
   # `pull_request` while adding a single `schedule` entry.
@@ -52,6 +52,13 @@ github:
               "${CHAT_WEBHOOK_URL}"
           env:
             CHAT_WEBHOOK_URL: ${{ secrets.CHAT_WEBHOOK_URL }}
+    # - name: "Publish Docker images"
+    #   runs-on: ubuntu-latest
+    #   if: failure() == false
+    #   steps:
+    #     - run:
+              
+
 
   # You can customize stage ordering as well as make certain stages be
   # conditional here, this is supported for all CI providers. The `if`

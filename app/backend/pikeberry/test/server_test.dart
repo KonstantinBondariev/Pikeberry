@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:grpc/grpc.dart';
-import 'package:pikeberry/generated/gpio.pbgrpc.dart';
+import 'package:pikeberry_backend/generated/gpio.pbgrpc.dart';
 import 'package:test/test.dart';
 
 void main() {

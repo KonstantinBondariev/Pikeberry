@@ -1,6 +1,6 @@
 import 'package:grpc/service_api.dart';
-import 'package:pikeberry/generated/gpio.pbgrpc.dart';
-import 'package:pikeberry/gpio/gpio_controller.dart';
+import 'package:pikeberry_backend/generated/gpio.pbgrpc.dart';
+import 'package:pikeberry_backend/gpio/gpio_controller.dart';
 
 class GpioService extends GpioServiceBase {
   final GpioController _gpioController;

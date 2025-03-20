@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - master
+      - develop
   pull_request:
 defaults:
   run:
@@ -39,16 +39,16 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "analyze; `dart analyze`"
+    name: "analyze; PKGS: app/backend/pikeberry, lib/docker; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry;commands:analyze"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry-lib/docker;commands:analyze"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:app/backend/pikeberry-lib/docker
             os:ubuntu-latest;pub-cache-hosted;sdk:dev
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -68,6 +68,15 @@ jobs:
         run: dart analyze
         if: "always() && steps.app_backend_pikeberry_pub_upgrade.conclusion == 'success'"
         working-directory: app/backend/pikeberry
+      - id: lib_docker_pub_upgrade
+        name: lib/docker; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: lib/docker
+      - name: lib/docker; dart analyze
+        run: dart analyze
+        if: "always() && steps.lib_docker_pub_upgrade.conclusion == 'success'"
+        working-directory: lib/docker
   job_003:
     name: Notify failure
     runs-on: ubuntu-latest

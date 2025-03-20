@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:ioc_container/ioc_container.dart';
-import 'package:pikeberry/gpio/gpio_controller.dart';
+import 'package:pikeberry_backend/gpio/gpio_controller.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pikeberry/gpio/gpio_controller_fake.dart';
-import 'package:pikeberry/gpio/gpio_service.dart';
+import 'package:pikeberry_backend/gpio/gpio_controller_fake.dart';
+import 'package:pikeberry_backend/gpio/gpio_service.dart';
 
 void main(List<String> args) async {
   final container = _bootstrap();
